@@ -36,3 +36,67 @@
     transform: rotate(360deg);
   }
 }
+ .login-form {
+  max-width: 300px;
+}
+ .login-form-forgot {
+  float: right;
+}
+ .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+ .login-form-button {
+  width: 100%;
+}
+.login-form {
+  max-width: 300px;
+}
+.login-form-forgot {
+  float: right;
+}
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-form-button {
+  width: 100%;
+}
+.mainBody{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+.site-card-wrapper{
+  display: grid;
+}
+.rating{
+  display: flex;
+  justify-content: center;
+  margin-left: 100px;
+}
+.example {
+  margin: 20px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  justify-content: center;
+  text-align: center;
+  z-index: 9999;
+  opacity: 0.5;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+.globeIcon{
+  color: white;
+  /* padding-top: 10px; */
+}
+.CartIcon{
+  padding-left: 15px;
+ 
+}
+.LanguageIcon{
+  margin-top: 18px;
+}
+.CartLink{
+ text-decoration: none;
+ color: white;
+}
