@@ -19,9 +19,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Languages from "./Languages";
 import { Link, useNavigate } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-type CartProps = {
-  cartItems: number;
-};
+import { Logout } from "@mui/icons-material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -63,7 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Header(props: CartProps) {
+export default function Header() {
     const productList = useSelector((state:any) => state.Reducer.productList);
         const  navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -109,9 +107,14 @@ export default function Header(props: CartProps) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+      <MenuItem onClick={()=>Logout()}>Logout</MenuItem>
+    </Menu> 
   );
-
+  const Logout = () =>
+  {
+    localStorage.removeItem('user-info')
+    navigate('/')
+  }
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -190,12 +193,15 @@ export default function Header(props: CartProps) {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search Products..."
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+           {localStorage.getItem('user-info') &&
+           <>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            
             <IconButton
               size="large"
               aria-label="show 4 new mails"
@@ -225,6 +231,7 @@ export default function Header(props: CartProps) {
             >
               <AccountCircle />
             </IconButton>
+           
             <Link className="CartLink" to = '/cart'> 
             <IconButton size="medium" color="inherit">
               <div className="CartIcon">
@@ -234,6 +241,7 @@ export default function Header(props: CartProps) {
               </div>
             </IconButton>
             </Link>
+            
             {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -256,6 +264,7 @@ export default function Header(props: CartProps) {
               <MoreIcon />
             </IconButton>
           </Box>
+          </>}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

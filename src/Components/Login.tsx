@@ -1,6 +1,7 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 export const Login = () => {
     const  navigate = useNavigate();
@@ -12,6 +13,8 @@ export const Login = () => {
   };
 
   return (
+    <>
+    <Header/>
       <div className="mainBody">
     <Form
       name="normal_login"
@@ -66,5 +69,6 @@ export const Login = () => {
       </Form.Item>
     </Form>
     </div>
+    </>
   );
 };

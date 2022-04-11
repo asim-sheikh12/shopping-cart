@@ -6,17 +6,20 @@ import { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import { DeleteItem } from "../Redux/Actions";
+import Header from "./Header";
 export const Cart = () => {
   const [data,setData] = useState<any[]>([])
   const dispatch = useDispatch();
 
 
   const productList = useSelector((state:any) => state.Reducer.productList);
+  console.log("Cart Item>>>>>",productList)
  useEffect(() => {
+
    setData(productList)
 
-   console.log(data)
- }, [data])
+  //  console.log(data)
+ }, [data,productList])
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -24,9 +27,12 @@ export const Cart = () => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+  let Total = data.reduce((total, item) => item.data.price + total, 0)
 
-  return (
+  return (  
     <div>
+      <Header/>
+      <h1>Cart Total : {Total} </h1>
         <Box sx={{ flexGrow: 35 }}>
           <Grid
             container
@@ -38,11 +44,12 @@ export const Cart = () => {
               <Grid item xs={2} sm={4} md={4} key={index}>
                 <Item>
                   <h5>
-                    {item.data.productData.title}
+                    {item.data.title}
                   </h5>
-                  <img src={item.data.productData.image} height="200px" width="200px" />
-                  <h2>Price: $ {item.data.productData.price}</h2>
-                  <Button onClick={()=>dispatch(DeleteItem(item.data.productData.id))}>Remove Item</Button>
+                  <img src={item.data.image} height="200px" width="200px" />
+                  <h2>Price: $ {item.data.price}</h2>
+                  <h2>ID: {item.data.id}</h2>
+                  <Button onClick={()=>dispatch(DeleteItem(item.data.id))}>Remove Item</Button>
                 </Item>
               </Grid>
             ))}

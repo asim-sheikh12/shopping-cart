@@ -10,18 +10,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "./Header";
 import { AddToCart } from "../Redux/Actions";
+ import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 export const DisplayPage = () => {
-  const [count, setCount] = useState<number>(0);
   const { t } = useTranslation();
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const productList = useSelector((state:any) => state.Reducer.productList);
-  console.log('List>>>>>>>',productList)
   const dispatch = useDispatch();
-  // function AddToCart(item:{}) {
-  //   setCount(count + 1);
-  //   console.log(item);
-  // }
+  const notify = () => toast("Item added to cart!");
 
   useEffect(() => {
     const url = "https://fakestoreapi.com/products";
@@ -29,7 +26,9 @@ export const DisplayPage = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
+        console.log(response)
         const result = await response.json();
+        console.log(result)
         setData(result);
         setLoading(false);
       } catch (error) {
@@ -48,7 +47,7 @@ export const DisplayPage = () => {
 
   return (
     <div>
-      <Header cartItems={count} />
+      <Header/>
       {loading ? (
         <div className="example">
           <CircularProgress />

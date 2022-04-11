@@ -1,32 +1,35 @@
 
 interface CounterState {
-  productList: [],
+  productList: [];
 }
-const initialState : CounterState= {
-  productList : [] ,
+const initialState: CounterState = {
+  productList: [],
 };
 
-const Reducer = (state = initialState, action : any) => {
+const Reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      const  productData = action.payload;
-      const id = action.payload;
-              {
+      const productData : {} = action.payload;
+      {
         return {
           ...state,
           productList: [
             ...state.productList,
-          {
-            data : productData,
-          }
-          ]
+            {...productData},
+          ],
         };
       }
-       case "DELETE_ITEM":
-      const newList = state.productList.filter((elem : any) => elem.id !== action.id);
-
+    case "DELETE_ITEM":
+      const id = action.payload
+      console.log("Delete ID",id)
+      console.log("Total List >>>>>>",state.productList);
+      const newList = state.productList.filter(
+        (elem:any) => 
+        elem.data.id !== id 
+      );
+      console.log("New List >>>>>>",newList)  
       return {
-        list: newList,
+        productList: newList,
       };
       break;
     default:
